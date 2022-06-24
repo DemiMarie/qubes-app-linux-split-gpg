@@ -426,6 +426,9 @@ int parse_options(int argc, char *untrusted_argv[], int *input_fds,
             sanitize_option_list(allowed_verify_options, "verify");
         } else if (opt == opt_export_options) {
             sanitize_option_list(allowed_export_options, "export");
+        } else if (opt == opt_photo_viewer) {
+            if (strcmp(optarg, "/bin/true"))
+                errx(1, "Only /bin/true allowed as photo viewer");
         }
     }
     // Only allow key IDs to begin with '-' if the options list was terminated by '--',
