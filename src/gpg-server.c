@@ -21,10 +21,10 @@ int main(int argc, char *argv[])
     // use static both to reduce stack space and ensure NULL-termination
     // client can pass up to COMMAND_MAX_LEN-1 arguments, but argument 0
     // is another argument and there is also the NULL pointer that
-    // terminates the argv array
-    static char *(untrusted_remote_argv[COMMAND_MAX_LEN+1]);
-    // same as above, but add 1 for each argument added by the server
+    // terminates the argv array.  The server adds 5 static arguments as
+    // well.
     static char *(remote_argv[COMMAND_MAX_LEN+6]);
+    char **untrusted_remote_argv = remote_argv + 5;
     int input_fds[MAX_FDS], output_fds[MAX_FDS];
     int input_fds_count, output_fds_count;
 
@@ -73,8 +73,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    memcpy(remote_argv + 6, untrusted_remote_argv + 1,
-           sizeof(untrusted_remote_argv) - sizeof(untrusted_remote_argv[0]));
     /* now options are verified and we get here only when all are allowed */
     remote_argv[0] = argv[1];
     // provide a better error message than "inappropriate ioctl for device"
