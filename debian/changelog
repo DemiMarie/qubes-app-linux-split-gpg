@@ -1,3 +1,10 @@
+qubes-gpg-split (2.0.83-1) unstable; urgency=medium
+
+  [ Kunal Mehta ]
+  * Do not install to /var/run in Debian package
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Thu, 19 Feb 2026 13:24:36 +0100
+
 qubes-gpg-split (2.0.82-1) unstable; urgency=medium
 
   [ Demi Marie Obenour ]
